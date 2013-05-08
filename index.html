@@ -7,28 +7,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="vendor/jquery/jquery-1.9.1.js"></script>
     <script src="js/setup.js"></script>
-      <script>
-        $.ajax('https://api.parse.com/1/classes/messages', {
-          contentType: 'application/json',
-          success: function(data){
-            displayMessages(data);
-            console.log(data);
-            console.log(data.results);
-            console.log(data.results[0]);
-          },
-        error: function(data) {
-          console.log('Ajax request failed');
-        }
-        });
-
-        var displayMessages = function(data) {
-          for(var i = 0; i < data.results.length; i++) {
-            $litag = $('<li class = "chatMessage"></li>');
-            $litag.text(data.results[i].text);
-            $('#userMessages').append($litag);
-          }
-        };
-      </script>
+    <script src="js/chat-client.js"></script>
   </head>
   <body>
 
