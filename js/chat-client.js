@@ -1,6 +1,6 @@
 var room = "tuckertest1";
 var memory = {};
-var temp;
+var friends = {};
 var changeroom = function(newRoom){
   room = newRoom || "messages";
 };
@@ -10,7 +10,6 @@ $.ajax('https://api.parse.com/1/classes/'+room, {
   contentType: 'application/json',
       success: function(data){
         displayMessages(data);
-        temp = data;
       },
     error: function(data) {
       console.log('Ajax request failed');
@@ -22,13 +21,18 @@ $.ajax('https://api.parse.com/1/classes/'+room, {
         if(!memory.hasOwnProperty(data.results[i].objectId)){
           memory[data.results[i].objectId] = true;
           $litag = $('<li class = "chatMessage"></li>');
-          $litag.text(data.results[i].text);
-          $span = $('<span class="username"></span>');
-          $span.text(data.results[i].username + ": ");
-          $litag.prepend($span);
+          $msg = $('<span class="message"></span>');
+          $msg.text(data.results[i].text);
+          $username = $('<span class="username"></span>');
+          $username.text(data.results[i].username);
+          $litag.prepend($username);
+          $litag.append(": ");
+          $litag.append($msg);
           $('#userMessages').append($litag);
+          $username.on('click', function(event){
+            friends[$username.text()] = true;
+           });
         }
-
       }
     };
 };
@@ -65,5 +69,9 @@ $('#receiveMsg').on('click',function(){
     receiveIt();
   });
 
+
+$('.username').on('click', function(event){
+  console.log("HDGHJSKHK");
+});
 
 });
