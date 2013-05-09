@@ -6,6 +6,7 @@ body {
 
 #main {
     width: 500px;
+    max-height: 500px;
     margin: auto;
     text-align: left;
     background: white;
